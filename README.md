@@ -29,4 +29,11 @@ It uses **OCR (Tesseract)** + **Flask web app** to extract voter details (Name, 
 
 ---
 
-## 📂 Project Structure
+## How to RUN
+- Install Tesseract OCR
+- then Update path in app.py in **pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"**
+- install all required modules by running **pip install -r requirements.txt** in cmd (in Project path)
+- Then simply run **python app.py** in cmd in respective folder
+- then the website will run locally , just ctrl+click on the local host link
+
+
