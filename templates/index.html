@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voter ID Card Extractor</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f6f7fb; }
+    .wrap { max-width: 900px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    h1 { margin: 0 0 16px; }
+    p.muted { color: #666; margin-top: 6px; }
+    form { display: flex; gap: 12px; align-items: center; margin: 16px 0 24px; }
+    input[type=file] { padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
+    button { padding: 10px 16px; border: 0; border-radius: 10px; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; }
+    button:hover { opacity: 0.95; }
+    .card { border: 1px solid #eee; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .grid { overflow-x: auto; border: 1px solid #eee; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; text-align: left; }
+    th { background: #fafafa; }
+    .kv { display: grid; grid-template-columns: 120px 1fr; gap: 8px; }
+    .kv div { padding: 6px 10px; border: 1px dashed #e5e7eb; border-radius: 8px; background: #fafafa; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Voter ID Card Extractor</h1>
+    <p class="muted">Upload image (JPG/PNG)</p>
+
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept="image/*" required />
+      <button type="submit">Upload & Extract</button>
+    </form>
+
+    {% if fields %}
+    <div class="card">
+      <h3>Latest Extraction</h3>
+      <div class="kv">
+        <div><b>Name</b></div><div>{{ fields["Name"] }}</div>
+        <div><b>Father's Name</b></div><div>{{ fields["Father's Name"] }}</div>
+        <div><b>House No.</b></div><div>{{ fields["House No."] }}</div>
+        <div><b>Age</b></div><div>{{ fields["Age"] }}</div>
+        <div><b>Sex</b></div><div>{{ fields["Sex"] }}</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <h3>All Records</h3>
+      <div class="grid">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Father's Name</th><th>House No.</th><th>Age</th><th>Sex</th></tr>
+          </thead>
+          <tbody>
+            {% for r in records %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ r.get("Name","") }}</td>
+              <td>{{ r.get("Father's Name","") }}</td>
+              <td>{{ r.get("House No.","") }}</td>
+              <td>{{ r.get("Age","") }}</td>
+              <td>{{ r.get("Sex","") }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4">No records yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
