@@ -22,11 +22,11 @@ def extract_text(img_path: str) -> str:
 def extract_fields(text: str) -> dict:
     fields = {"Name": "", "Father's Name": "", "House No.": "", "Age": "", "Sex": ""}
 
-    # Normalize text
+    
     clean_text = text.replace("’", "'").replace("‘", "'")
     clean_text = re.sub(r"\s+", " ", clean_text)
 
-    # Use non-greedy match until next keyword
+    
     name_match = re.search(r"NAME\s*:\s*(.*?)(?=FATHER|HOUSE|AGE|SEX|$)", clean_text, re.I)
     father_match = re.search(r"FATHER'?S NAME\s*:\s*(.*?)(?=HOUSE|AGE|SEX|$)", clean_text, re.I)
     house_match = re.search(r"HOUSE NO\.?\s*:\s*(.*?)(?=AGE|SEX|$)", clean_text, re.I)
