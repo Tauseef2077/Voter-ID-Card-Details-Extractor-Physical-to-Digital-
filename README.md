@@ -36,4 +36,4 @@ It uses **OCR (Tesseract)** + **Flask web app** to extract voter details (Name, 
 - Then simply run **python app.py** in cmd in respective folder
 - then the website will run locally , just ctrl+click on the local host link
 
-**Sample Voter ID image is also in the folder with excel file if wanted any change in it , you can.**
+**Sample Voter ID image is also in the folder with MS Word file if wanted any change in it , you can.**
